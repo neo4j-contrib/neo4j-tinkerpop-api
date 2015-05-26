@@ -18,52 +18,15 @@
  */
 package org.neo4j.tinkerpop.api;
 
-import org.neo4j.graphdb.*;
-import org.neo4j.helpers.collection.IterableWrapper;
-import java.util.List;
+import java.util.Set;
 
-import static org.neo4j.graphdb.DynamicRelationshipType.withName;
-import static org.neo4j.tinkerpop.api.Util.wrap;
+public interface Neo4jNode extends Neo4jEntity {
+    Set<String> labels();
+    boolean hasLabel(String label);
+    void addLabel(String label);
+    void removeLabel(String label);
 
-/**
- * @author mh
- * @since 25.03.15
- */
-public class Neo4jNode extends Neo4jEntity<Node> {
-    public Neo4jNode(Node node) {
-        super(node);
-    }
-    public List<String> labels() { return Util.toLabels(entity.getLabels());}
-    public boolean hasLabel(String label) { return entity.hasLabel(DynamicLabel.label(label));}
-    public void addLabel(String label) { entity.addLabel(DynamicLabel.label(label));}
-    public void removeLabel(String label) { entity.removeLabel(DynamicLabel.label(label));}
-
-    public int degree(Neo4jDirection direction, String type) {
-        return type == null ?
-                (direction != null ?
-                        entity.getDegree(direction.direction) :
-                        entity.getDegree()) :
-                (direction != null ?
-                        entity.getDegree(withName(type), direction.direction) :
-                        entity.getDegree(withName(type)));
-    }
-    public Iterable<Neo4jRelationship> relationships(Neo4jDirection direction, String...types) {
-        Iterable<Relationship> relationships = types.length == 0 ?
-                (direction != null ?
-                        entity.getRelationships(direction.direction) :
-                        entity.getRelationships()) :
-                (direction != null ?
-                        entity.getRelationships(direction.direction, Util.types(types)) :
-                        entity.getRelationships(Util.types(types)));
-
-        return new IterableWrapper<Neo4jRelationship, Relationship>(relationships) {
-            @Override
-            protected Neo4jRelationship underlyingObjectToObject(Relationship relationship) {
-                return new Neo4jRelationship(relationship);
-            }
-        };
-    }
-    public Neo4jRelationship connectTo(Neo4jNode node, String type) {
-        return wrap(entity.createRelationshipTo(node.entity,DynamicRelationshipType.withName(type)));
-    }
+    int degree(Neo4jDirection direction, String type);
+    Iterable<Neo4jRelationship> relationships(Neo4jDirection direction, String...types);
+    Neo4jRelationship connectTo(Neo4jNode node, String type);
 }

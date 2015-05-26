@@ -18,28 +18,14 @@
  */
 package org.neo4j.tinkerpop.api;
 
-import org.neo4j.graphdb.*;
+public interface Neo4jEntity {
 
-import java.util.List;
-
-/**
- * @author mh
- * @since 25.03.15
- */
-public class Neo4jEntity<T extends PropertyContainer> {
-
-    protected final T entity;
-
-    public Neo4jEntity(T entity) {
-        this.entity = entity;
-    }
-
-    public long getId() { return entity instanceof Node ? ((Node) entity).getId() : ((Relationship) entity).getId(); }
-    public Iterable<String> getKeys() { return entity.getPropertyKeys(); }
-    public Object getProperty(String name) { return entity.getProperty(name); }
-    public Object getProperty(String name, Object defaultValue) { return entity.getProperty(name, defaultValue); }
-    public void setProperty(String name, Object value)  { entity.setProperty(name, value); }
-    public Object removeProperty(String name)  { return entity.removeProperty(name); }
-    public boolean hasProperty(String name)  { return entity.hasProperty(name); }
-    public void delete()  { if (entity instanceof Node) ((Node)entity).delete(); else ((Relationship)entity).delete(); }
+    long getId();
+    Iterable<String> getKeys();
+    Object getProperty(String name);
+    Object getProperty(String name, Object defaultValue);
+    void setProperty(String name, Object value);
+    Object removeProperty(String name);
+    boolean hasProperty(String name);
+    void delete();
 }

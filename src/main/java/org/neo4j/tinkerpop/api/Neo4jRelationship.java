@@ -18,20 +18,10 @@
  */
 package org.neo4j.tinkerpop.api;
 
-import org.neo4j.graphdb.Relationship;
+public interface Neo4jRelationship extends Neo4jEntity {
 
-/**
- * @author mh
- * @since 25.03.15
- */
-public class Neo4jRelationship extends Neo4jEntity<Relationship> {
-
-    public Neo4jRelationship(Relationship rel) {
-        super(rel);
-    }
-
-    public String type() { return entity.getType().name(); }
-    public Neo4jNode start() { return new Neo4jNode(entity.getStartNode()); }
-    public Neo4jNode end() { return new Neo4jNode(entity.getEndNode()); }
-    public Neo4jNode other(Neo4jNode node) { return new Neo4jNode(entity.getOtherNode(node.entity)); }
+    String type();
+    Neo4jNode start();
+    Neo4jNode end();
+    Neo4jNode other(Neo4jNode node);
 }

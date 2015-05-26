@@ -18,21 +18,21 @@
  */
 package org.neo4j.tinkerpop.api;
 
-import org.neo4j.graphdb.factory.GraphDatabaseFactory;
-
 import java.util.Map;
 
-/**
- * @author mh
- * @since 25.03.15
- */
-public class Neo4jFactory {
 
-    public Neo4jGraphAPI open(String path) {
-        return new Neo4jGraphAPI(new GraphDatabaseFactory().newEmbeddedDatabase(path));
-    }
-    public Neo4jGraphAPI open(String path,Map<String,String> config) {
-        return new Neo4jGraphAPI(new GraphDatabaseFactory().newEmbeddedDatabaseBuilder(path)
-                .setConfig(config).newGraphDatabase());
+public interface Neo4jFactory {
+
+    Neo4jGraphAPI newGraphDatabase(String path, Map<String, String> config);
+
+    public static class Builder {
+        public static Neo4jGraphAPI open(String path, Map<String, String> config) {
+            try {
+                Neo4jFactory factory = (Neo4jFactory) Class.forName("org.neo4j.tinkerpop.api.impl.Neo4jFactoryImpl").newInstance();
+                return factory.newGraphDatabase(path, config);
+            } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+                throw new RuntimeException("Error instantiating Neo4j Database for "+path);
+            }
+        }
     }
 }
