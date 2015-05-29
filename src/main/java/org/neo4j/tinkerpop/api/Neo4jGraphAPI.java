@@ -46,9 +46,4 @@ public interface Neo4jGraphAPI {
     boolean hasProperty(String key);
     Object removeProperty(String key);
     void setProperty(String key, Object value);
-
-    @Deprecated
-    void autoIndexProperties(boolean node, String...properties);
-    @Deprecated
-    boolean hasAutoIndex(boolean node, String property);
 }
