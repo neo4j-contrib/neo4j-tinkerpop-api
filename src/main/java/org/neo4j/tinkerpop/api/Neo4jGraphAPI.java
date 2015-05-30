@@ -32,7 +32,6 @@ public interface Neo4jGraphAPI {
     Iterable<Neo4jNode> allNodes();
     Iterable<Neo4jRelationship> allRelationships();
 
-    Iterable<Neo4jRelationship> findRelationships(String property,Object value);
     Iterable<Neo4jNode> findNodes(String property,Object value);
     Iterable<Neo4jNode> findNodes(String label);
     Iterable<Neo4jNode> findNodes(String label, String property, Object value);
