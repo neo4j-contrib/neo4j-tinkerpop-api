@@ -20,7 +20,6 @@ package org.neo4j.tinkerpop.api;
 
 import java.util.Iterator;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public interface Neo4jGraphAPI {
 
@@ -36,13 +35,9 @@ public interface Neo4jGraphAPI {
 
     Iterable<Neo4jRelationship> allRelationships();
 
-    Iterable<Neo4jNode> findNodes(String property, Object value);
-
     Iterable<Neo4jNode> findNodes(String label);
 
     Iterable<Neo4jNode> findNodes(String label, String property, Object value);
-
-    void awaitIndexesOnline(final long time, final TimeUnit timeUnit);
 
     Neo4jTx tx();
 
