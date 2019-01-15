@@ -25,7 +25,7 @@ public interface Neo4jFactory {
 
     Neo4jGraphAPI newGraphDatabase(String path, Map<String, String> config);
 
-    public static class Builder {
+    class Builder {
         public static Neo4jGraphAPI open(String path, Map<String, String> config) {
             try {
                 Neo4jFactory factory = (Neo4jFactory) Class.forName("org.neo4j.tinkerpop.api.impl.Neo4jFactoryImpl").newInstance();

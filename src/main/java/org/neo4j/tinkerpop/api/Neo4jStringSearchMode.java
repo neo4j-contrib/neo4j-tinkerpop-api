@@ -18,9 +18,6 @@
  */
 package org.neo4j.tinkerpop.api;
 
-public interface Neo4jRelationship extends Neo4jEntity {
-    String type();
-    Neo4jNode start();
-    Neo4jNode end();
-    Neo4jNode other(Neo4jNode node);
+public enum Neo4jStringSearchMode {
+    EXACT, PREFIX, SUFFIX, CONTAINS
 }

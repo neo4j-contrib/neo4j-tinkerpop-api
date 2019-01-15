@@ -23,5 +23,5 @@ package org.neo4j.tinkerpop.api;
 * @since 25.03.15
 */
 public enum Neo4jDirection {
-    INCOMING,OUTGOING,BOTH;
+    INCOMING, OUTGOING, BOTH
 }
