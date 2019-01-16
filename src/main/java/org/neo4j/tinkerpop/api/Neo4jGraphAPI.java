@@ -39,6 +39,8 @@ public interface Neo4jGraphAPI {
 
     Iterable<Neo4jNode> findNodes(String label, String property, Object value);
 
+    Iterable<Neo4jNode> findNodes(String label, String property, String template, Neo4jStringSearchMode searchMode);
+
     Neo4jTx tx();
 
     Iterator<Map<String, Object>> execute(String query, Map<String, Object> params);
