@@ -19,6 +19,7 @@
 package org.neo4j.tinkerpop.api;
 
 public interface Neo4jEntity {
+
     long getId();
     Iterable<String> getKeys();
     Object getProperty(String name);

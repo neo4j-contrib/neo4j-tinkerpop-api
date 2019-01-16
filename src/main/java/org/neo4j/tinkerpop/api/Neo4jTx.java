@@ -18,8 +18,9 @@
  */
 package org.neo4j.tinkerpop.api;
 
-public interface Neo4jTx extends AutoCloseable {
+public interface Neo4jTx extends AutoCloseable{
     void failure();
+
     void success();
     void close();
 }
